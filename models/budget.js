@@ -10,7 +10,7 @@ var BudgetSchema = Schema(
 );
 
 BudgetSchema.virtual('url').get(function() {
-    return '/budget/' + this._id;
+    return '/base/budget/' + this._id;
 });
 
 module.exports = mongoose.model('Budget', BudgetSchema);

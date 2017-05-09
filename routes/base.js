@@ -34,7 +34,7 @@ router.post('/budget/:id/update', budget_controller.budget_update_post);
 router.get('/budget/:id', budget_controller.budget_detail);
 
 // GET request for all budgets
-router.get('/budget/budgets', budget_controller.budget_list);
+router.get('/budgets', budget_controller.budget_list);
 
 
         /// Account Routes ///
@@ -61,7 +61,7 @@ router.post('/account/:id/update', account_controller.account_update_post);
 router.get('/account/:id', account_controller.account_detail);
 
 // GET request for all accounts
-router.get('/account/accounts', account_controller.account_list);
+router.get('/accounts', account_controller.account_list);
 
 
 
@@ -89,7 +89,7 @@ router.post('/transaction/:id/update', transaction_controller.transaction_update
 router.get('/transaction/:id', transaction_controller.transaction_detail);
 
 // GET request for all transactions
-router.get('/transaction/transactions', transaction_controller.transaction_list);
+router.get('/transactions', transaction_controller.transaction_list);
 
 
         /// category Routes ///
@@ -116,6 +116,6 @@ router.post('/category/:id/update', category_controller.category_update_post);
 router.get('/category/:id', category_controller.category_detail);
 
 // GET request for all categories
-router.get('/category/categories', category_controller.category_list);
+router.get('/categories', category_controller.category_list);
 
 module.exports = router;
