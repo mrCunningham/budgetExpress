@@ -12,7 +12,7 @@ exports.account_detail = function(req, res, next) {
 
 // account create form on GET
 exports.account_create_get = function(req, res, next) {
-    res.send('NOT IMPLEMENTED');
+    res.render('account_form', { title: 'Create Account' });
 };
 
 // account create on POST
