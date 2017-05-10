@@ -2,7 +2,7 @@ var Budget = require('../models/budget');
 
 // Index
 exports.index = function(req, res, next) {
-    res.send('NOT IMPLEMENTED');
+    res.render('index', { title:'Budget Time'});
 };
 
 // List of all budgets

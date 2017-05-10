@@ -6,7 +6,7 @@ block content
     form(method='POST' action='')
         div.form-group
             label(for='name') Category:
-            input#name.form-control(type='text', name='name', value=(undefined===category ? '' : category.name))
+            input#name.form-control(type='text', name='name', value=(undefined===category ? '' : category.name), required=true)
         button.btn.btn-primary(type='submit') submit
 
     if errors

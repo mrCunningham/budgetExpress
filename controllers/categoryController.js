@@ -41,7 +41,7 @@ exports.category_create_post = function(req, res, next) {
 
     if (errors) {
         res.render('category_form', { title: 'Create Category', category: category, errors: errors });
-    return;
+        return;
     }
     else {
         Category.findOne({ 'name': req.body.name })

@@ -14,6 +14,7 @@ var app = express();
 //Setup mongoose connection
 var mongoose = require('mongoose');
 var mongoDB =  'mongodb://cunningham91:taylor123!@ds133321.mlab.com:33321/local_budget';
+mongoose.Promise = global.Promise;
 mongoose.connect(mongoDB);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB Connection Error'));

@@ -1,0 +1,51 @@
+extends layout
+
+block content
+    h1 #{title}
+
+    form(method='POST' action='')
+        div.form-group
+            label(for='account') Account:
+            select#account.form-control(type='select', placeholder='Select account' name='account' required='true' )
+                for account in accounts
+                    if budget
+                        option(value=account._id selected=(account._id.toString()==budget.account ? 'selected' : false) ) #{account.name}
+                    else
+                        option(value=account._id) #{account.name}
+
+        div.form-group
+            label(for='category') Category:
+            select#category.form-control(type='select', placeholder='Select category' name='category' required='true' )
+                for category in categories
+                    if budget
+                        option(value=category._id selected=(category._id.toString()==budget.category ? 'selected' : false) ) #{category.name}
+                    else
+                        option(value=category._id) #{category.name}
+
+        div.form-group
+            label(for='type') Type:
+            select#type.form-control(type='select', placeholder='Select transaction type', name='transaction', required=true)
+                option(value='Debit') Debit
+                option(value='Credit') Credit
+
+        div.form-group
+            label(for='recurrence') Recurrence:
+            select#type.form-control(type='select', placeholder='Select recurrence type', name='recurrence', required=true)
+                option(value='Once') Once
+                option(value='Weekly') Weekly
+                option(value='Biweekly') Bi-Weekly
+                option(value='Monthly') Monthly
+
+        div.form-group
+            label(for='recurDate') Recurrence start date
+            input#recurDate.form-control(type='date' name='recurDate' value=(undefined===transaction ? '' : transaction.recurDate))
+
+        div.form-group
+            label(for='amount') Amount:
+            input#name.form-control(type='text', name='amount', value=(undefined===transaction ? '' : transaction.amount), required=true)
+
+        button.btn.btn-primary(type='submit') submit
+    if errors
+        ul
+            for error in errors
+                li!= error.msg

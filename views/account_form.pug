@@ -6,7 +6,10 @@ block content
     form(method='POST' action='')
         div.form-group
             label(for='name') Account:
-            input#name.form-control(type='text', name='name', value=(undefined===account ? '' : account.name))
+            input#name.form-control(type='text', name='name', value=(undefined===account ? '' : account.name), required=true)
+        div.form-group
+            label(for='balance') Balance:
+            input#name.form-control(type='text', name='balance', value=(undefined===account ? '' : account.balance), required=true)
         button.btn.btn-primary(type='submit') submit
 
     if errors
