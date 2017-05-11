@@ -5,10 +5,11 @@ var Schema = mongoose.Schema;
 
 var TransactionSchema = Schema(
     {
+        name: {type: String, required: true},
         account: {type: Schema.ObjectId, ref: 'Account'},
         category: {type: Schema.ObjectId, ref: 'Category'},
         type: {type: String, enum: ['Debit', 'Credit'], default: 'Debit', required: true},
-        amount: {type: Number, requires: true},
+        amount: {type: Number, required: true},
         recurrence: {type: String, enum: ['Once', 'Weekly', 'Bi-Weekly', 'Monthly'], default: 'Once', required: true},
         recurDate: {type: Date, required: true}
     }

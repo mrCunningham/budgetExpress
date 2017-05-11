@@ -34,25 +34,63 @@ exports.transaction_create_get = function(req, res, next) {
 exports.transaction_create_post = function(req, res, next) {
     // Check fields on POST
     var schema = {
-        'account' : {
-            notEmpty : true,
-            errorMessage: 'Invalid Account'
-        },
-        'category': { 
-            notEmpty : true,
-            errorMessage : 'Invalid Category'
-         },
          'amount': {
             isCurrency : true,
             errorMessage : 'Invalid amount'
          },
-         'recurDate': {
-             isDate : true,
-             errorMessage : 'Invalid Date'
+         'name': {
+             notEmpty: true,
+             errorMessage: 'Name required'
          }
     };  
     
     req.checkBody(schema);
+
+    // Trim and sanitize the fields
+    req.sanitize('amount').escape();
+    req.sanitize('amount').trim();
+
+    req.sanitize('name').escape();
+    req.sanitize('name').trim();
+
+    // Create new transaction
+    var transaction = new Transaction(
+        {
+            name: req.body.name,
+            account: req.body.account,
+            category: req.body.category,
+            type: req.body.type,
+            amount: req.body.amount,
+            recurrence: req.body.recurrence,
+            recurDate: req.body.recurDate
+        }
+    );
+
+    // Run validators
+    var errors = req.validationErrors();
+
+    if (errors) {
+        //Get categories and accounts
+        async.parallel({
+        categories: function(callback) {
+            Category.find(callback);
+        },
+        accounts: function (callback) {
+            Account.find(callback);
+        },
+    }, function(err, results) {
+        if (err) { return next(err); }
+
+    });
+        res.render('transaction_form', { title: 'Create Transaction', accounts: results.accounts, categories: results.categories, transaction: transaction, errors: errors});
+    } 
+    else {
+        transaction.save( (err) => {
+            if (err) { return next(err); }
+
+            res.redirect(transaction.url);
+        });
+    }
 };
 
 // transaction delete form on GET
